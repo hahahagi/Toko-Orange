@@ -21,9 +21,7 @@ function App() {
             <Route path="/checkout" element={<Checkout />} />
           </Routes>
         </main>
-        <footer className="footer">
-          &copy; 2025 TokoOrange.
-        </footer>
+        <footer className="footer">&copy; 2025 TokoOrange.</footer>
       </div>
     </CartProvider>
   );
