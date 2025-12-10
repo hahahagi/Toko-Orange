@@ -1,12 +1,22 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { Search } from "lucide-react";
 import { products } from "../data/products";
 import { useCart } from "../context/CartContext";
 
 const ProductList = () => {
   const { addToCart } = useCart();
+  const [searchInput, setSearchInput] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [filterCategory, setFilterCategory] = useState("All");
+
+  const getRating = (id) => (4 + (id % 10) / 10).toFixed(1);
+  const getSoldCount = (id) => 35 + id * 9;
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    setSearchTerm(searchInput.trim());
+  };
 
   // Logika Filter dan Search
   const filteredProducts = products.filter((product) => {
@@ -22,16 +32,30 @@ const ProductList = () => {
 
   return (
     <div className="container product-page">
-      <h2>Daftar Produk</h2>
+      <div className="section-heading">
+        <h2>Daftar Produk</h2>
+        <p className="section-subtitle">
+          Temukan barang dengan kurasi harga terbaik dan siap dikirim cepat.
+        </p>
+      </div>
 
       <div className="filters">
-        <input
-          type="text"
-          placeholder="Cari produk..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="search-input"
-        />
+        <form className="search-bar" onSubmit={handleSearchSubmit}>
+          <input
+            type="text"
+            placeholder="Cari produk..."
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            className="search-input"
+          />
+          <button
+            type="submit"
+            className="search-button"
+            aria-label="Cari produk"
+          >
+            <Search size={18} />
+          </button>
+        </form>
 
         <select
           value={filterCategory}
@@ -58,11 +82,9 @@ const ProductList = () => {
                   <h3>{product.name}</h3>
                 </Link>
                 <div className="product-meta">
-                  <span className="rating">
-                    ⭐ 4.{Math.floor(Math.random() * 5) + 5}
-                  </span>
+                  <span className="rating">⭐ {getRating(product.id)}</span>
                   <span className="sold-count">
-                    {Math.floor(Math.random() * 100) + 10} Terjual
+                    {getSoldCount(product.id)} Terjual
                   </span>
                 </div>
                 <p className="product-price">

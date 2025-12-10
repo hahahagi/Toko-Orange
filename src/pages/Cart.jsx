@@ -12,7 +12,7 @@ const Cart = () => {
       <div className="container empty-cart">
         <h2>Keranjang Belanja</h2>
         <p>Keranjangmu masih kosong.</p>
-        <Link to="/products" className="cta-button">
+        <Link to="/products" className="cta-button" style={{marginTop: "10px"}}>
           Mulai Belanja
         </Link>
       </div>
