@@ -33,7 +33,7 @@ const ProductList = () => {
   return (
     <div className="container product-page">
       <div className="section-heading">
-        <h2>Daftar Produk</h2>
+        <h2 className="product-list">Daftar Produk</h2>
         <p className="section-subtitle">
           Temukan barang dengan kurasi harga terbaik dan siap dikirim cepat.
         </p>

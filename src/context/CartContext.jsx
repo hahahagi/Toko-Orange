@@ -1,14 +1,23 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
+import { useAuth } from "./AuthContext";
 
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
+  const { user } = useAuth();
   const [cart, setCart] = useState([]);
   const [toast, setToast] = useState({
     show: false,
     message: "",
     type: "success",
   });
+
+  // Reset keranjang saat user logout
+  useEffect(() => {
+    if (!user) {
+      setCart([]);
+    }
+  }, [user]);
 
   // Fungsi menampilkan toast
   const showToast = (message, type = "success") => {
@@ -20,6 +29,11 @@ export const CartProvider = ({ children }) => {
 
   // Fungsi tambah ke keranjang
   const addToCart = (product) => {
+    if (!user) {
+      showToast("Silakan login terlebih dahulu untuk berbelanja", "error");
+      return;
+    }
+
     setCart((prevCart) => {
       const existingItem = prevCart.find((item) => item.id === product.id);
       if (existingItem) {

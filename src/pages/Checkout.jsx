@@ -1,13 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useCart } from "../context/CartContext";
+import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const Checkout = () => {
   const { getTotalPrice, setCart } = useCart();
+  const { user } = useAuth();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!user) {
+      navigate("/customer/login");
+    }
+  }, [user, navigate]);
+
   const [formData, setFormData] = useState({
-    name: "",
+    name: user?.name || "",
     address: "",
     phone: "",
     payment: "transfer",
