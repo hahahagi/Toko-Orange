@@ -80,11 +80,6 @@ const CustomerLogin = () => {
             Akun lain: sinta@tokoorange.id / sinta123
           </p>
         </div>
-
-        <div className="auth-footer-link">
-          <span>Login sebagai admin?</span>
-          <Link to="/admin/login">Masuk Admin</Link>
-        </div>
       </div>
     </div>
   );

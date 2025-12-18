@@ -117,9 +117,6 @@ const Navbar = () => {
               <Link to="/customer/login" className="pill-link">
                 Login Customer
               </Link>
-              <Link to="/admin/login" className="pill-link pill-alt">
-                Login Admin
-              </Link>
             </div>
           )}
         </div>
